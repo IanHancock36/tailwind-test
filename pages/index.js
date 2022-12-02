@@ -1,9 +1,22 @@
+import React, { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import { BsFillCloudMoonFill } from 'react-icons/bs'
+import { BsFillCloudMoonFill } from "react-icons/bs";
 import styles from "../styles/Home.module.css";
+import AlienHead from "../public/alien.png";
+import Modal from "./modal";
 
 export default function Home() {
+  let [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,17 +25,52 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-white px-10">
-        <section className=" min-h-screen">
+        <section className="min-h-screen">
           <nav className="py-10 mb-12 flex justify-between">
             <h1 className="text-md">LOGO NAME</h1>
+
             <ul className="flex items-center">
-              <li><BsFillCloudMoonFill className="cursor-pointer text-2xl"/></li>
               <li>
-                <a className="bg-gradient-to-r from- bg-cyan-500 to-teal-500 text-white px-4 py-2 rounded-md ml-8" href="#">NEAT STUFF</a>
+                <BsFillCloudMoonFill className="cursor-pointer text-2xl" />
+              </li>
+              <li>
+                <a
+                  className="bg-gradient-to-r from- bg-cyan-500 to-teal-500 text-white px-4 py-2 rounded-md ml-8"
+                  href="#"
+                >
+                  NEAT STUFF
+                </a>
               </li>
             </ul>
           </nav>
+          <div className="text-center p-10">
+            <h2 className="text-4xl py-2 font-medium">IAN</h2>
+            <h2 className="text-2xl py-2">Developer</h2>
+            <p className="text-md py-5 leading-8">
+              I make things fhsfkdjkhadskjhfsdkahfsdajfaskdfad
+              dkjhashfkdasjhfkjdsakjfdsahfklaks jldsjahlkjdhsakljfafhsf
+            </p>
+          </div>
+          <div className="text-2xl flex justify-center gap-16 py-3">
+            <div>ICON#1</div>
+            <div>ICON#2</div>
+            <div>ICON#3</div>
+          </div>
+          <div>
+            <Image src={AlienHead} width="200" height="200" />
+          </div>
+          <div className="fixed inset-0 flex items-center justify-center"></div>
         </section>
+        <div className="fixed inset-0 flex items-center justify-center">
+          <button
+            type="button"
+            onClick={openModal}
+            className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+          >
+            Open dialog
+          </button>
+        </div>
+        <Modal isOpen={isOpen} closeModal={closeModal} openModal={openModal} />
       </main>
     </div>
   );
